@@ -1,4 +1,4 @@
-package com.csdApp.fileManager;
+package com.csdapp.fileManager;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.csdApp.model.Mother;
+import com.csdapp.model.Mother;
 
 public class FileManager {
 	private String projectPath;

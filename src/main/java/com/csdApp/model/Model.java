@@ -1,4 +1,4 @@
-package com.csdApp.model;
+package com.csdapp.model;
 
 public abstract class Model implements Runnable{
 	public Model(int allelNumber, int generationNumber, int netSideSize, double dip,

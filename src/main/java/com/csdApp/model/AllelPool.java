@@ -1,4 +1,4 @@
-package com.csdApp.model;
+package com.csdapp.model;
 
 
 

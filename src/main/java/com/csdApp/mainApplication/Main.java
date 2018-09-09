@@ -1,4 +1,4 @@
-package com.csdApp.mainApplication;
+package com.csdapp.mainapplication;
 
 import java.io.File;
 

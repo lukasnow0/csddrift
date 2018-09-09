@@ -1,9 +1,9 @@
-package com.csdApp.mainApplication;
+package com.csdapp.mainapplication;
 
 
 
-import com.csdApp.model.Model;
-import com.csdApp.model.ModelNew;
+import com.csdapp.model.Model;
+import com.csdapp.model.ModelNew;
 
 import javafx.application.Platform;
 import javafx.concurrent.Service;

@@ -1,6 +1,6 @@
 //not implemented yet
 //
-//package com.csdApp.model;
+//package com.csdapp.model;
 //
 //import java.util.ArrayList;
 //import java.util.Iterator;

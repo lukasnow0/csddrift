@@ -1,4 +1,4 @@
-package com.csdApp.model;
+package com.csdapp.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.csdApp.fileManager.FileManager;
+import com.csdapp.fileManager.FileManager;
 
 public class ModelOld implements Runnable{
 	public static int winterFactor = 20;
@@ -234,7 +234,7 @@ public class ModelOld implements Runnable{
 			//matka ginie
 			return false;
 		}
-		//matka prze¿ywa
+		//matka przeï¿½ywa
 		return true;
 	}
 		

@@ -1,4 +1,4 @@
-package com.csdApp.mainApplication;
+package com.csdapp.mainapplication;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
