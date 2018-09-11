@@ -26,10 +26,11 @@ public class ModelNew extends Model{
 	private AllelPool allelPool;
 	private boolean torus;
 	private String dir;
+	private int droneNumber;
 	
 	public ModelNew(int allelNumber, int generationNumber, int netSideSize, double dip,
-			int droneDist, int swarmingDist, String dir, boolean torus, int winterFactor){
-		super(swarmingDist, swarmingDist, swarmingDist, dip, swarmingDist, swarmingDist, dir, torus, winterFactor);
+			int droneDist, int swarmingDist, String dir, boolean torus, int winterFactor, int droneNumber){
+		super(swarmingDist, swarmingDist, swarmingDist, dip, swarmingDist, swarmingDist, dir, torus, winterFactor, droneNumber);
 		this.generationCount = 1;
 		this.motherCount = 0;
 		this.allelNumber = allelNumber;
@@ -43,6 +44,7 @@ public class ModelNew extends Model{
 		this.dir = dir;
 		this.torus = torus;
 		this.winterFactor = winterFactor;
+		this.droneNumber = droneNumber;
 		net = new Mother[netSideSize][netSideSize];
 		eggNet = new Mother[netSideSize][netSideSize];
 		allelPool = new AllelPool(allelNumber);
@@ -112,7 +114,7 @@ public class ModelNew extends Model{
 		for(int i = 0; i < net.length; i++){
 			for(int j = 0; j < net.length; j++){
 				if (net[i][j].isYoungMother()) {
-					Allel[] tempAllels = neighbouringAllels(net[i][j], 15);
+					Allel[] tempAllels = neighbouringAllels(net[i][j], droneNumber);
 					net[i][j].setSpermPool(tempAllels);
 					net[i][j].setYoungMother(false);
 					net[i][j].redundandAllelCheck();

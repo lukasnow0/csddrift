@@ -29,6 +29,7 @@ public class Output {
 	static boolean dispSim;
 	static boolean torus;
 	static int winterFactor;
+	static int droneNumber;
 
 	static Stage window;
 	static Label label1;
@@ -37,7 +38,8 @@ public class Output {
 	static ProgressBar labelGen;
 	static Button buttonClose;
 	
-	public Output(int allelNum, int genNum, int netSize, double dip, int droneDist, int swarmDist, String projectDir, boolean dispSim, boolean torus, int winterFactor){
+	public Output(int allelNum, int genNum, int netSize, double dip, int droneDist, int swarmDist, String projectDir,
+				  boolean dispSim, boolean torus, int winterFactor, int droneNumber){
 		Output.allelNum = allelNum;
 		Output.genNum = genNum;
 		Output.netSize = netSize;
@@ -48,6 +50,7 @@ public class Output {
 		Output.dispSim = dispSim;
 		Output.torus = torus;
 		Output.winterFactor = winterFactor;
+		Output.droneNumber = droneNumber;
 	}
 	
 	public void display() {
@@ -116,7 +119,7 @@ public class Output {
 	
 	private static class ModelService extends Service<Integer> {
 	//	Model model = new ModelOld(allelNum, genNum, netSize, dip, droneDist, swarmDist, projectDir, torus);
-		Model model = new ModelNew(allelNum, genNum, netSize, dip, droneDist, swarmDist, projectDir, torus, winterFactor);
+		Model model = new ModelNew(allelNum, genNum, netSize, dip, droneDist, swarmDist, projectDir, torus, winterFactor, droneNumber);
 		Thread modelThread = new Thread(model);
 
 		@Override
