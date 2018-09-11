@@ -10,7 +10,7 @@ import com.csdapp.fileManager.FileManager;
 
 public class ModelNew extends Model{
 
-	public static int winterFactor = 20;
+	private int winterFactor;
 	private int generationCount;
 	private long motherCount;
 	private int allelNumber;
@@ -28,8 +28,8 @@ public class ModelNew extends Model{
 	private String dir;
 	
 	public ModelNew(int allelNumber, int generationNumber, int netSideSize, double dip,
-			int droneDist, int swarmingDist, String dir, boolean torus){
-		super(swarmingDist, swarmingDist, swarmingDist, dip, swarmingDist, swarmingDist, dir, torus);
+			int droneDist, int swarmingDist, String dir, boolean torus, int winterFactor){
+		super(swarmingDist, swarmingDist, swarmingDist, dip, swarmingDist, swarmingDist, dir, torus, winterFactor);
 		this.generationCount = 1;
 		this.motherCount = 0;
 		this.allelNumber = allelNumber;
@@ -42,6 +42,7 @@ public class ModelNew extends Model{
 		this.fileManager = new FileManager(dir , "\\simInfo", "\\Generation");
 		this.dir = dir;
 		this.torus = torus;
+		this.winterFactor = winterFactor;
 		net = new Mother[netSideSize][netSideSize];
 		eggNet = new Mother[netSideSize][netSideSize];
 		allelPool = new AllelPool(allelNumber);

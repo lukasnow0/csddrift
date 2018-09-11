@@ -31,6 +31,7 @@ public class Main extends Application {
 	Label labelProjectPath;
 	Label labelShowSim;
 	Label labelDispSim;
+	Label labelWinterFactor;
 	TextField textAlleleNum;
 	TextField textGenNum;
 	TextField textNetSize;
@@ -38,6 +39,7 @@ public class Main extends Application {
 	TextField textDroneDist;
 	TextField textSwarmDist;
 	TextField textProjectDir;
+	TextField textWinterFactor;
 	ChoiceBox<String> boxNetType;
 	CheckBox boxDispSim;
 	Button buttonOpen;
@@ -52,6 +54,7 @@ public class Main extends Application {
 	String projectDir;
 	boolean dispSim;
 	boolean torus;
+	int winterFactor;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -73,7 +76,7 @@ public class Main extends Application {
 		buttonGenerate.setOnAction( e -> runSimulationWindow());
 		buttonClose.setOnAction( e -> window.close());
 		
-		scene = new Scene(layout, 390, 335);
+		scene = new Scene(layout, 410, 365);
 		window.setScene(scene);
 		window.show();
 	}
@@ -116,45 +119,52 @@ public class Main extends Application {
 		
 		textSwarmDist = new TextField("5");
 		layout.setConstraints(textSwarmDist, 1, 5);
+
+		labelWinterFactor = new Label("Accidental death factor:");
+		layout.setConstraints(labelWinterFactor,0, 6);
+
+		textWinterFactor = new TextField("20");
+		layout.setConstraints(textWinterFactor, 1, 6);
 		
 		labelNetType  = new Label("Net type:");
-		layout.setConstraints(labelNetType, 0, 6);
+		layout.setConstraints(labelNetType, 0, 7);
 		
 		boxNetType = new ChoiceBox<>();
 		boxNetType.getItems().addAll("Regular net", "Torus net");
 		boxNetType.setValue("Regular net");
-		layout.setConstraints(boxNetType, 1, 6);
+		layout.setConstraints(boxNetType, 1, 7);
 		
 		labelDispSim = new Label("Display simulation: ");
-		layout.setConstraints(labelDispSim, 0, 7);
+		layout.setConstraints(labelDispSim, 0, 8);
 		
 		boxDispSim = new CheckBox();
 		boxDispSim.setDisable(true);
-		layout.setConstraints(boxDispSim, 1, 7);
+		layout.setConstraints(boxDispSim, 1, 8);
 		
 		labelProjectPath = new Label("Project folder:");
-		layout.setConstraints(labelProjectPath, 0, 8);
+		layout.setConstraints(labelProjectPath, 0, 9);
 		
 		textProjectDir = new TextField("C:\\CSDAllelSimulation\\Output");
-		layout.setConstraints(textProjectDir, 1, 8);
+		layout.setConstraints(textProjectDir, 1, 9);
 		
 		buttonOpen = new Button("Open directory");
-		layout.setConstraints(buttonOpen, 2, 8);
+		layout.setConstraints(buttonOpen, 2, 9);
 		
 		buttonGenerate = new Button("Generate");
 		HBox hBoxbtnGen = new HBox();
 		hBoxbtnGen.setAlignment(Pos.CENTER_RIGHT);
 		hBoxbtnGen.getChildren().add(buttonGenerate);
-		layout.setConstraints(hBoxbtnGen, 1, 9);
+		layout.setConstraints(hBoxbtnGen, 1, 10);
 		
 		buttonClose = new Button("Close");
 		HBox hBoxbtnCls = new HBox();
 		hBoxbtnCls.setAlignment(Pos.CENTER_RIGHT);
 		hBoxbtnCls.getChildren().add(buttonClose);
-		layout.setConstraints(hBoxbtnCls, 2, 9);
+		layout.setConstraints(hBoxbtnCls, 2, 10);
 		
-		layout.getChildren().addAll(labelAlleleNum, textAlleleNum, labelGenNum, textGenNum, labelNetSize, textNetSize, labelDip,
-				textDip, labelDroneDist, textDroneDist, labelSwarmDist, textSwarmDist, labelDispSim, boxDispSim, labelNetType, boxNetType, labelProjectPath, textProjectDir,
+		layout.getChildren().addAll(labelAlleleNum, textAlleleNum, labelGenNum, textGenNum, labelNetSize, textNetSize,
+				labelDip, textDip, labelDroneDist, textDroneDist, labelSwarmDist, textSwarmDist, labelWinterFactor,
+				textWinterFactor, labelDispSim, boxDispSim, labelNetType, boxNetType, labelProjectPath, textProjectDir,
 				buttonOpen, hBoxbtnGen, hBoxbtnCls);
 		
 	}
@@ -172,7 +182,7 @@ public class Main extends Application {
 	private void runSimulationWindow() {
 		//To do
 		boolean flag = checkValues();
-		Output output = new Output(allelNum, genNum, netSize, dip, droneDist, swarmDist, projectDir, dispSim, torus);
+		Output output = new Output(allelNum, genNum, netSize, dip, droneDist, swarmDist, projectDir, dispSim, torus, winterFactor);
 		if(flag){
 			output.display();			
 		}
@@ -181,7 +191,7 @@ public class Main extends Application {
 	private boolean checkValues() {
 		
 		if(! textAlleleNum.getText().isEmpty() || ! textGenNum.getText().isEmpty() || ! textNetSize.getText().isEmpty() || ! textDip.getText().isEmpty() || 
-				! textDroneDist.getText().isEmpty() || ! textSwarmDist.getText().isEmpty() || ! textProjectDir.getText().isEmpty()) {
+				! textDroneDist.getText().isEmpty() || ! textSwarmDist.getText().isEmpty() || ! textProjectDir.getText().isEmpty() || !textWinterFactor.getText().isEmpty()) {
 			
 			try {
 				allelNum = Integer.parseInt(textAlleleNum.getText());
@@ -191,6 +201,7 @@ public class Main extends Application {
 				droneDist = Integer.parseInt(textDroneDist.getText());
 				swarmDist = Integer.parseInt(textSwarmDist.getText());
 				projectDir = textProjectDir.getText();
+				winterFactor = Integer.parseInt(textWinterFactor.getText());
 				
 				if (!projectDir.endsWith("Output")){
 					projectDir = projectDir.concat("//Output");
@@ -215,10 +226,11 @@ public class Main extends Application {
 		}
 		
 		if(allelNum > 1 && allelNum < 1001 && genNum > 0 && genNum < 100001 && netSize > 19 && netSize < 1025
-				&& dip >= 0 && dip <= 0.8 && droneDist > 0 && droneDist < 11 && swarmDist > 0 && swarmDist < 11) {
+				&& dip >= 0 && dip <= 0.8 && droneDist > 0 && droneDist < 11 && swarmDist > 0 && swarmDist < 11
+				&& winterFactor >= 1 && winterFactor <= 30) {
 			return true;			
 		} else {
-			String message = "The value is out of range!\r\nThe ranges for variables are listed below:\r\nAllele number: 2 - 1000, Generation Number: 2 - 100 000, Net side size: 20 - 1024,\r\nDIP: 0.0 - 0.8, Drone distance: 1 - 10, Swarming distance: 1 - 10.";
+			String message = "The value is out of range!\r\nThe ranges for variables are listed below:\r\nAllele number: 2 - 1000, Generation Number: 2 - 100 000, Net side size: 20 - 1024,\r\nDIP: 0.0 - 0.8, Drone distance: 1 - 10, Swarming distance: 1 - 10, Accidental death factor: 1 - 30.";
 			MessageWindow mw = new MessageWindow();
 			mw.display("Input data out of range", message);
 			return false;
